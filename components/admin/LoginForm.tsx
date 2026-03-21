@@ -19,16 +19,49 @@ export function LoginForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [showPassword, setShowPassword] = React.useState<boolean>(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }))
+  }
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
+    setError(null)
 
-    // Simulation of login
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Invalid email or password")
+      }
+
+      // Success - redirect to admin dashboard
+      router.push("/admin")
+      router.refresh() // Refresh to update middleware state if needed
+      
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
       setIsLoading(false)
-      // router.push("/admin/dashboard")
-    }, 1000)
+    }
   }
 
   return (
@@ -41,6 +74,11 @@ export function LoginForm() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
+          {error && (
+            <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-md text-sm text-center">
+              {error}
+            </div>
+          )}
           <form onSubmit={onSubmit}>
             <div className="grid gap-6">
               <div className="grid gap-3">
@@ -50,6 +88,8 @@ export function LoginForm() {
                   type="email"
                   placeholder="name@example.com"
                   required
+                  value={formData.email}
+                  onChange={handleChange}
                   disabled={isLoading}
                   className="border-neutral-200 focus:ring-neutral-900 h-12 text-lg"
                 />
@@ -61,6 +101,8 @@ export function LoginForm() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     required
+                    value={formData.password}
+                    onChange={handleChange}
                     disabled={isLoading}
                     className="border-neutral-200 focus:ring-neutral-900 h-12 text-lg pr-12"
                   />
