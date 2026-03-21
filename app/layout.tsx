@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Rubenix CMS",
-  description: "Rubenix CMS",
+  title: "Rubenius CMS",
+  description: "Rubenius CMS",
 };
 
 export default function RootLayout({

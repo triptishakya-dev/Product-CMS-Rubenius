@@ -1,12 +1,21 @@
+import '@/app/globals.css';
+import { Toaster } from 'react-hot-toast';
+import NavbarAdmin from '@/components/admin/NavbarAdmin';
+import SidebarAdmin from '@/components/admin/SidebarAdmin';
 
-export default function AdminLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex-1">
-      {children}
+    <div className="flex h-screen w-full overflow-hidden bg-white">
+      <Toaster position="top-right" />
+      <SidebarAdmin />
+      <div className="flex flex-col flex-1 h-full overflow-hidden">
+        <NavbarAdmin className="w-full shrink-0" />
+        <main className="flex-1 overflow-y-auto">
+          {children}
+        </main>
+      </div>
     </div>
   );
-}
+};
+
+export default Layout;
