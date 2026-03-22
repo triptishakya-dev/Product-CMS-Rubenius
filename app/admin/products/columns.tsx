@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { AlertModal } from "@/components/admin/AlertModal"
 import { ProductViewModal } from "@/components/admin/ProductViewModal"
+import { ProductModal } from "@/components/admin/ProductModal"
 
 export type ProductColumn = {
   id: number
@@ -30,6 +31,7 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [viewOpen, setViewOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
@@ -72,6 +74,11 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
         onClose={() => setViewOpen(false)}
         data={data}
       />
+      <ProductModal
+        isOpen={editOpen}
+        onClose={() => setEditOpen(false)}
+        initialData={data}
+      />
       <div className="flex items-center gap-x-2">
         <Button
           variant="outline"
@@ -84,7 +91,7 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
         <Button
           variant="outline"
           size="icon"
-          onClick={() => console.log("Edit", data.id)}
+          onClick={() => setEditOpen(true)}
           className="h-8 w-8 border-gray-300 hover:bg-gray-100 text-black shadow-sm transition-all active:scale-95"
         >
           <Edit className="h-4 w-4" />

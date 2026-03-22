@@ -1,3 +1,5 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function RootGroupLayout({
   children,
@@ -5,8 +7,12 @@ export default function RootGroupLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex-1">
-      {children}
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-1 pt-24 md:pt-32">
+        {children}
+      </main>
+      <Footer />
     </div>
   );
 }

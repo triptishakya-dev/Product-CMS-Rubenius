@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils"
 interface ProductModalProps {
   isOpen: boolean
   onClose: () => void
+  initialData?: any // ProductColumn | null
 }
 
 interface ImageMetadata {
@@ -32,6 +33,7 @@ interface ImageMetadata {
 export const ProductModal: React.FC<ProductModalProps> = ({
   isOpen,
   onClose,
+  initialData,
 }) => {
   const [isMounted, setIsMounted] = React.useState(false)
   const [step, setStep] = React.useState(1)
@@ -44,9 +46,34 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
 
+  const title = initialData ? "Edit Product" : "Add Product"
+  const descriptionText = initialData ? "Update your product details." : "Create a new product for your store."
+  const toastMessage = initialData ? "Product updated." : "Product created."
+  const action = initialData ? "Save Changes" : "Create Product"
+
   React.useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  React.useEffect(() => {
+    if (initialData) {
+      setName(initialData.name)
+      setDescription(initialData.description)
+      setUsps(Array.isArray(initialData.usp) ? initialData.usp : [initialData.usp])
+      setImagePreview(initialData.image)
+      setImageMeta({
+        name: "Existing Image",
+        size: "Unknown",
+        type: "S3"
+      })
+    } else {
+      setName("")
+      setDescription("")
+      setUsps([""])
+      setImagePreview(null)
+      setImageMeta(null)
+    }
+  }, [initialData, isOpen])
 
   if (!isMounted) {
     return null
@@ -116,8 +143,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         return
       }
 
-      const response = await fetch("/api/products", {
-        method: "POST",
+      const url = initialData 
+        ? `/api/products/${initialData.id}` 
+        : "/api/products"
+      const method = initialData ? "PATCH" : "POST"
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -130,10 +162,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       })
 
       if (!response.ok) {
-        throw new Error("Failed to create product")
+        throw new Error(initialData ? "Failed to update product" : "Failed to create product")
       }
 
-      toast.success("Product created successfully!")
+      toast.success(toastMessage)
       router.refresh()
       onClose()
       // Reset form
@@ -172,12 +204,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div className="flex flex-col gap-1">
               <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Step {step} of 2</span>
               <DialogTitle className="text-3xl font-extrabold tracking-tight">
-                {step === 1 ? "Basic Information" : "Details & Assets"}
+                {title} - {step === 1 ? "Basic Info" : "Details"}
               </DialogTitle>
               <DialogDescription className="text-gray-500 text-base mt-2">
-                {step === 1 
-                  ? "Let's start with the basics. What's the name and story of your product?" 
-                  : "Almost there! Add the unique features and a stunning image for your product."}
+                {descriptionText}
               </DialogDescription>
             </div>
           </DialogHeader>
@@ -341,7 +371,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   className="h-12 px-8 rounded-xl bg-black text-white hover:bg-gray-800 font-bold shadow-lg shadow-black/10 transition-all active:scale-95 disabled:opacity-50"
                 >
                   {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                  Create Product
+                  {action}
                 </Button>
               )}
             </div>
