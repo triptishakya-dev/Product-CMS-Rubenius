@@ -12,8 +12,8 @@ export async function middleware(request) {
   if (pathname.startsWith("/admin")) {
     // Exclude login and register pages from protection
     if (
-      pathname === "/admin/login" ||
-      pathname === "/admin/register"
+      pathname === "/login" ||
+      pathname === "/register"
     ) {
       return NextResponse.next();
     }
@@ -22,7 +22,7 @@ export async function middleware(request) {
 
     if (!token) {
       console.log("No token found, redirecting to login");
-      const url = new URL("/admin/login", request.url);
+      const url = new URL("/login", request.url);
       return NextResponse.redirect(url);
     }
 

@@ -36,7 +36,7 @@ const SidebarAdmin = () => {
       });
       if (response.ok) {
         toast.success("Logged out successfully!", { id: "logout" });
-        router.push("/admin/login");
+        router.push("/login");
       } else {
         const data = await response.json();
         toast.error(`Logout failed: ${data.message}`, { id: "logout" });

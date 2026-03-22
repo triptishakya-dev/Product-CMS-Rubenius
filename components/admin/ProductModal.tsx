@@ -1,7 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { Plus, Trash2, ChevronRight, ChevronLeft, Upload, X, FileIcon, ImageIcon } from "lucide-react"
+import { Plus, Trash2, ChevronRight, ChevronLeft, Upload, X, FileIcon, ImageIcon, Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { toast } from "react-hot-toast"
 
 import {
   Dialog,
@@ -32,11 +34,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
 }) => {
   const [isMounted, setIsMounted] = React.useState(false)
-  const [step, setStep] = React.useState(1)
+  const [name, setName] = React.useState("")
+  const [description, setDescription] = React.useState("")
   const [usps, setUsps] = React.useState<string[]>([""])
   const [imagePreview, setImagePreview] = React.useState<string | null>(null)
   const [imageMeta, setImageMeta] = React.useState<ImageMetadata | null>(null)
+  const [loading, setLoading] = React.useState(false)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   React.useEffect(() => {
     setIsMounted(true)
@@ -102,8 +107,47 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   }
 
   const onSubmit = async () => {
-    console.log("Submitting UI state...")
-    onClose()
+    try {
+      setLoading(true)
+      
+      if (!name || !description || !imagePreview || usps.some(u => !u.trim())) {
+        toast.error("Please fill all fields and add at least one USP.")
+        return
+      }
+
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          usp: usps.filter(u => u.trim() !== ""),
+          image: imagePreview,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to create product")
+      }
+
+      toast.success("Product created successfully!")
+      router.refresh()
+      onClose()
+      // Reset form
+      setStep(1)
+      setName("")
+      setDescription("")
+      setUsps([""])
+      setImagePreview(null)
+      setImageMeta(null)
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.")
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const StepIndicator = () => (
@@ -146,6 +190,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   <Label htmlFor="name" className="text-sm font-bold text-gray-700">Product Name</Label>
                   <Input 
                     id="name" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Rubenius Premium Edition" 
                     className="h-12 px-4 rounded-xl border-gray-200 bg-gray-50 focus:bg-white transition-all focus:ring-2 focus:ring-black/5 focus:border-black"
                   />
@@ -154,6 +200,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   <Label htmlFor="description" className="text-sm font-bold text-gray-700">Description</Label>
                   <Textarea 
                     id="description" 
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     placeholder="Describe the value proposition and core features..." 
                     className="min-h-[180px] p-4 rounded-xl border-gray-200 bg-gray-50 focus:bg-white transition-all focus:ring-2 focus:ring-black/5 focus:border-black resize-none"
                   />
@@ -288,8 +336,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               ) : (
                 <Button 
                   onClick={onSubmit}
-                  className="h-12 px-8 rounded-xl bg-black text-white hover:bg-gray-800 font-bold shadow-lg shadow-black/10 transition-all active:scale-95"
+                  disabled={loading}
+                  className="h-12 px-8 rounded-xl bg-black text-white hover:bg-gray-800 font-bold shadow-lg shadow-black/10 transition-all active:scale-95 disabled:opacity-50"
                 >
+                  {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                   Create Product
                 </Button>
               )}

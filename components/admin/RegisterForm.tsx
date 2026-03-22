@@ -186,7 +186,7 @@ export function RegisterForm() {
         <CardFooter className="pt-4">
           <div className="text-base text-neutral-500 text-center w-full">
             Already have an account?{" "}
-            <a href="/admin/login" className="text-neutral-900 hover:underline font-medium">
+            <a href="/login" className="text-neutral-900 hover:underline font-medium">
               Sign in
             </a>
           </div>

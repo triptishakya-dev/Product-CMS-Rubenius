@@ -128,7 +128,7 @@ export function LoginForm() {
         <CardFooter className="pt-6">
           <div className="text-base text-neutral-500 text-center w-full">
             Don&apos;t have an account?{" "}
-            <a href="/admin/register" className="text-neutral-900 hover:underline font-medium">
+            <a href="/register" className="text-neutral-900 hover:underline font-medium">
               Register
             </a>
           </div>
