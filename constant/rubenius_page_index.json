@@ -1,0 +1,751 @@
+{
+  "metadata": {
+    "company": "Rubenius Interiors",
+    "version": "1.0",
+    "description": "Page index for vectorless RAG chatbot. Each index entry maps keywords, intent triggers, and aliases to QA IDs from rubenius_chatbot_qa.json. Use keyword matching (exact + partial) to retrieve the best-matching QA pair(s) without embeddings or vector search.",
+    "usage": "1. Tokenize user query. 2. Scan keyword_triggers for substring/word matches. 3. Collect all matching qa_ids. 4. Rank by match_weight + number of keyword hits. 5. Return top 1-3 QA answers.",
+    "source_file": "rubenius_chatbot_qa.json",
+    "generated_date": "2026-03-22"
+  },
+
+  "categories": [
+    {
+      "category_id": "CAT_01",
+      "label": "Company Overview",
+      "qa_ids": [1, 2, 3, 4, 5, 6, 42, 43, 46, 49]
+    },
+    {
+      "category_id": "CAT_02",
+      "label": "Location & Contact",
+      "qa_ids": [7, 8, 9, 10]
+    },
+    {
+      "category_id": "CAT_03",
+      "label": "Services",
+      "qa_ids": [11, 12, 13, 14, 15, 16, 17, 47, 48]
+    },
+    {
+      "category_id": "CAT_04",
+      "label": "Projects & Sectors",
+      "qa_ids": [18, 19, 20, 21, 22, 23, 24, 44, 45]
+    },
+    {
+      "category_id": "CAT_05",
+      "label": "Clients",
+      "qa_ids": [25, 26, 27]
+    },
+    {
+      "category_id": "CAT_06",
+      "label": "Philosophy & Approach",
+      "qa_ids": [3, 30, 31, 32, 33]
+    },
+    {
+      "category_id": "CAT_07",
+      "label": "Awards & Recognition",
+      "qa_ids": [34, 35, 36]
+    },
+    {
+      "category_id": "CAT_08",
+      "label": "Process",
+      "qa_ids": [37, 38, 39]
+    },
+    {
+      "category_id": "CAT_09",
+      "label": "Global Reach",
+      "qa_ids": [28, 29]
+    },
+    {
+      "category_id": "CAT_10",
+      "label": "Getting Started",
+      "qa_ids": [50]
+    }
+  ],
+
+  "index": [
+
+    {
+      "index_id": "IDX_001",
+      "topic": "What is Rubenius",
+      "qa_ids": [1],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "what is rubenius", "who is rubenius", "about rubenius",
+        "rubenius company", "tell me about rubenius", "rubenius overview",
+        "what does rubenius do", "rubenius interior", "rubenius firm",
+        "interior wellbeing co", "interior wellbeing company"
+      ],
+      "intent": "company_info"
+    },
+
+    {
+      "index_id": "IDX_002",
+      "topic": "Company founding year",
+      "qa_ids": [2],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "founded", "when was rubenius", "established", "how old",
+        "since when", "started in", "year started", "2005",
+        "history", "how long", "years in business"
+      ],
+      "intent": "company_history"
+    },
+
+    {
+      "index_id": "IDX_003",
+      "topic": "Interior Wellbeing philosophy",
+      "qa_ids": [3, 30, 31, 32, 33],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "interior wellbeing", "philosophy", "pillars", "four pillars",
+        "wellbeing", "approach", "belief", "values", "mission",
+        "vision", "design philosophy", "core values", "guiding principle"
+      ],
+      "intent": "philosophy"
+    },
+
+    {
+      "index_id": "IDX_004",
+      "topic": "Founder and leadership",
+      "qa_ids": [4, 6],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "founder", "rajesh", "director", "leadership", "who founded",
+        "who runs", "ceo", "head", "management", "team lead",
+        "rajesh kumar das", "nebin", "ashok", "creative head"
+      ],
+      "intent": "leadership_info"
+    },
+
+    {
+      "index_id": "IDX_005",
+      "topic": "Projects completed and stats",
+      "qa_ids": [5, 42],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "how many projects", "projects completed", "330", "portfolio size",
+        "repeat business", "client satisfaction", "70%", "track record",
+        "experience", "how much work", "number of projects"
+      ],
+      "intent": "company_stats"
+    },
+
+    {
+      "index_id": "IDX_006",
+      "topic": "Team size and members",
+      "qa_ids": [6],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "team", "team size", "staff", "employees", "how many people",
+        "in-house", "24 members", "designers", "architects",
+        "who works", "team members", "engineers"
+      ],
+      "intent": "team_info"
+    },
+
+    {
+      "index_id": "IDX_007",
+      "topic": "Office locations / address",
+      "qa_ids": [7],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "location", "address", "where are you", "office", "bangalore office",
+        "bengaluru", "bhubaneswar", "bhubaneshwar", "odisha",
+        "where is rubenius", "head office", "headquarters", "hq",
+        "banaswadi", "nandankanan road"
+      ],
+      "intent": "location"
+    },
+
+    {
+      "index_id": "IDX_008",
+      "topic": "Start a project / contact for project",
+      "qa_ids": [8, 50],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "start a project", "begin a project", "new project", "contact",
+        "get in touch", "reach out", "connect", "rajesh@rubenius",
+        "99000 11879", "how to hire", "engage rubenius",
+        "i want to work with you", "how do i start", "project enquiry"
+      ],
+      "intent": "contact_project"
+    },
+
+    {
+      "index_id": "IDX_009",
+      "topic": "Supplier enquiry",
+      "qa_ids": [9, 43],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "supplier", "vendor", "become a supplier", "supply",
+        "dibyani", "sourcing", "partner supplier", "material supplier",
+        "how to supply", "supply enquiry"
+      ],
+      "intent": "supplier"
+    },
+
+    {
+      "index_id": "IDX_010",
+      "topic": "Career / jobs at Rubenius",
+      "qa_ids": [10],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "career", "job", "join", "hiring", "vacancy", "opening",
+        "apply", "work at rubenius", "prathiba", "hr",
+        "recruitment", "internship", "opportunities", "join us"
+      ],
+      "intent": "careers"
+    },
+
+    {
+      "index_id": "IDX_011",
+      "topic": "All services overview",
+      "qa_ids": [11],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "services", "what do you offer", "offerings", "what can you do",
+        "capabilities", "service list", "all services", "solutions",
+        "what services", "service portfolio"
+      ],
+      "intent": "services_overview"
+    },
+
+    {
+      "index_id": "IDX_012",
+      "topic": "Design and Build service",
+      "qa_ids": [12, 37],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "design and build", "design & build", "full service design",
+        "complete design", "turnkey", "design build",
+        "interior design service", "design process", "how you design",
+        "design workflow", "from design to build"
+      ],
+      "intent": "service_design_build"
+    },
+
+    {
+      "index_id": "IDX_013",
+      "topic": "Workplace Consultancy service",
+      "qa_ids": [13],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "workplace consultancy", "consultancy", "space analysis",
+        "heat map", "space utilisation", "space utilization",
+        "data collection", "work pattern", "office analysis",
+        "space study", "space audit", "occupancy study"
+      ],
+      "intent": "service_consultancy"
+    },
+
+    {
+      "index_id": "IDX_014",
+      "topic": "Aftercare service",
+      "qa_ids": [14],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "aftercare", "after care", "post delivery", "after project",
+        "support after", "maintenance", "handover", "day 2",
+        "ongoing support", "post construction", "long term support"
+      ],
+      "intent": "service_aftercare"
+    },
+
+    {
+      "index_id": "IDX_015",
+      "topic": "Furniture service",
+      "qa_ids": [15],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "furniture", "custom furniture", "bespoke furniture",
+        "office furniture", "chairs", "tables", "desks",
+        "furniture design", "furnishing", "seating",
+        "interior accessories", "collectibles"
+      ],
+      "intent": "service_furniture"
+    },
+
+    {
+      "index_id": "IDX_016",
+      "topic": "Refurbishment service",
+      "qa_ids": [16],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "refurbishment", "renovation", "refurbish", "redo",
+        "revamp", "upgrade", "existing space", "remodel",
+        "makeover", "redecorate", "layout change", "office upgrade"
+      ],
+      "intent": "service_refurbishment"
+    },
+
+    {
+      "index_id": "IDX_017",
+      "topic": "Detail and Build / Storytelling service",
+      "qa_ids": [17],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "detail and build", "detail & build", "storytelling",
+        "spatial narrative", "narrative journey", "brand story",
+        "space storytelling", "experiential narrative"
+      ],
+      "intent": "service_detail_build"
+    },
+
+    {
+      "index_id": "IDX_018",
+      "topic": "Types of spaces Rubenius designs",
+      "qa_ids": [18],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "type of spaces", "what spaces", "sectors", "industries",
+        "domains", "commercial", "retail", "hospitality", "healthcare",
+        "what do you design", "kinds of projects", "office", "f&b",
+        "lab", "warehouse", "public space"
+      ],
+      "intent": "sectors"
+    },
+
+    {
+      "index_id": "IDX_019",
+      "topic": "Experience Centers",
+      "qa_ids": [19, 48],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "experience center", "experience centre", "experiential design",
+        "brand experience", "customer experience", "immersive space",
+        "showroom design", "demo center", "innovation center",
+        "interactive space", "experience design", "xc design"
+      ],
+      "intent": "experience_center"
+    },
+
+    {
+      "index_id": "IDX_020",
+      "topic": "Government / public sector projects",
+      "qa_ids": [20],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "government", "public sector", "bescom", "isro", "vssc",
+        "rajiv gandhi", "vvip terminal", "government project",
+        "public building", "government client", "electricity board"
+      ],
+      "intent": "sector_government"
+    },
+
+    {
+      "index_id": "IDX_021",
+      "topic": "Hospitality / hotel design",
+      "qa_ids": [21],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "hotel", "hospitality", "resort", "velvette", "hotel design",
+        "hospitality interior", "hotel interior", "accommodation design"
+      ],
+      "intent": "sector_hospitality"
+    },
+
+    {
+      "index_id": "IDX_022",
+      "topic": "Healthcare / hospital design",
+      "qa_ids": [22],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "hospital", "healthcare", "clinic", "medical", "hosmat",
+        "nairobi hospital", "patient experience", "healthcare design",
+        "medical interior", "health facility"
+      ],
+      "intent": "sector_healthcare"
+    },
+
+    {
+      "index_id": "IDX_023",
+      "topic": "F&B / restaurant / café / bar design",
+      "qa_ids": [23],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "restaurant", "cafe", "café", "bar", "f&b", "food and beverage",
+        "restobar", "rasa", "ls night", "divyasree", "dining space",
+        "restaurant interior", "food court", "canteen design"
+      ],
+      "intent": "sector_fnb"
+    },
+
+    {
+      "index_id": "IDX_024",
+      "topic": "Laboratory interior design",
+      "qa_ids": [24],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "lab", "laboratory", "lab design", "kewaunee", "research lab",
+        "science lab", "lab interior", "lab space", "lab fit-out"
+      ],
+      "intent": "sector_lab"
+    },
+
+    {
+      "index_id": "IDX_025",
+      "topic": "Notable clients list",
+      "qa_ids": [25],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "clients", "who are your clients", "brands", "companies",
+        "which brands", "customers", "client list", "who have you worked with",
+        "hp", "3m", "piramal", "pvr", "posco", "staubli", "oyo",
+        "cult.fit", "capitaland", "panduit", "prestige", "ankura"
+      ],
+      "intent": "client_list"
+    },
+
+    {
+      "index_id": "IDX_026",
+      "topic": "Schneider Electric testimonial / project",
+      "qa_ids": [26],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "schneider", "schneider electric", "testimonial",
+        "what clients say", "review", "feedback", "quote",
+        "vikas srivastava", "experiential design feedback"
+      ],
+      "intent": "client_testimonial"
+    },
+
+    {
+      "index_id": "IDX_027",
+      "topic": "Startups vs enterprise clients",
+      "qa_ids": [27],
+      "match_weight": 7,
+      "keyword_triggers": [
+        "startup", "small company", "sme", "enterprise", "large company",
+        "do you work with startups", "small business",
+        "all sizes", "any company size"
+      ],
+      "intent": "client_size"
+    },
+
+    {
+      "index_id": "IDX_028",
+      "topic": "International / global projects",
+      "qa_ids": [28],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "international", "global", "overseas", "outside india",
+        "abroad", "africa", "nairobi", "mombasa", "drc", "congo",
+        "singapore", "amsterdam", "netherlands", "international project",
+        "global reach", "foreign projects"
+      ],
+      "intent": "global_reach"
+    },
+
+    {
+      "index_id": "IDX_029",
+      "topic": "Dubai / Middle East expansion",
+      "qa_ids": [29],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "dubai", "uae", "middle east", "gulf", "abu dhabi",
+        "dubai project", "rubenius dubai", "expanding to dubai",
+        "middle east expansion"
+      ],
+      "intent": "global_dubai"
+    },
+
+    {
+      "index_id": "IDX_030",
+      "topic": "Sustainability approach",
+      "qa_ids": [30],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "sustainability", "sustainable", "green", "eco", "environment",
+        "energy waste", "material waste", "carbon", "leed",
+        "green building", "sustainable design", "eco-friendly",
+        "environmentally friendly", "smart green"
+      ],
+      "intent": "sustainability"
+    },
+
+    {
+      "index_id": "IDX_031",
+      "topic": "Technology integration in spaces",
+      "qa_ids": [31],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "technology", "tech", "digital", "smart space", "smart office",
+        "digital transformation", "iot", "interactive display",
+        "automation", "tech-enabled", "digital integration",
+        "technology in design", "smart building"
+      ],
+      "intent": "technology"
+    },
+
+    {
+      "index_id": "IDX_032",
+      "topic": "Biophilic design",
+      "qa_ids": [32],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "biophilia", "biophilic", "natural elements", "plants in office",
+        "nature-inspired", "greenery", "natural light", "organic design",
+        "nature in design", "living walls", "indoor plants"
+      ],
+      "intent": "biophilia"
+    },
+
+    {
+      "index_id": "IDX_033",
+      "topic": "Branded workspaces",
+      "qa_ids": [33],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "branded workspace", "brand equity", "brand identity",
+        "brand design", "corporate branding", "brand space",
+        "identity in space", "brand environment", "brand-led design"
+      ],
+      "intent": "branded_workspace"
+    },
+
+    {
+      "index_id": "IDX_034",
+      "topic": "Awards won",
+      "qa_ids": [34],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "awards", "award", "recognition", "won", "achievement",
+        "accolades", "prizes", "foaid", "construction week",
+        "spaciux", "igen", "lexus", "ksmboa", "iqa", "bid award",
+        "best designer", "top designer"
+      ],
+      "intent": "awards"
+    },
+
+    {
+      "index_id": "IDX_035",
+      "topic": "Publications and media features",
+      "qa_ids": [35],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "publication", "featured in", "press", "media", "article",
+        "magazine", "newspaper", "business standard", "your story",
+        "architect magazine", "things in india", "homify",
+        "mentioned in", "media coverage"
+      ],
+      "intent": "publications"
+    },
+
+    {
+      "index_id": "IDX_036",
+      "topic": "COVID-19 innovations",
+      "qa_ids": [36],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "covid", "pandemic", "isopod", "isolation pod", "isopod design",
+        "covid innovation", "pandemic design", "iit bombay",
+        "d'source", "healthcare innovation", "covid solution"
+      ],
+      "intent": "covid_innovation"
+    },
+
+    {
+      "index_id": "IDX_037",
+      "topic": "Design process steps",
+      "qa_ids": [37],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "process", "how do you work", "steps", "stages",
+        "project stages", "workflow", "methodology",
+        "brief discovery", "design development", "pre construction",
+        "project timeline", "how does it work"
+      ],
+      "intent": "process"
+    },
+
+    {
+      "index_id": "IDX_038",
+      "topic": "Budget and pricing",
+      "qa_ids": [38],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "budget", "cost", "pricing", "price", "how much",
+        "rates", "charges", "affordable", "value for money",
+        "transparent pricing", "quotation", "quote", "estimate",
+        "fee", "investment"
+      ],
+      "intent": "pricing"
+    },
+
+    {
+      "index_id": "IDX_039",
+      "topic": "Virtual reality / 3D visualisation",
+      "qa_ids": [39],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "virtual reality", "vr", "3d", "visualisation", "visualization",
+        "3d render", "renders", "walkthrough", "preview",
+        "visual presentation", "see the design", "mockup"
+      ],
+      "intent": "visualisation"
+    },
+
+    {
+      "index_id": "IDX_040",
+      "topic": "Blog / Insights articles",
+      "qa_ids": [40],
+      "match_weight": 7,
+      "keyword_triggers": [
+        "blog", "insights", "articles", "read", "knowledge",
+        "content", "thought leadership", "publications",
+        "write up", "latest articles", "news", "updates",
+        "trends", "roi of experience", "spatial design psychology"
+      ],
+      "intent": "insights"
+    },
+
+    {
+      "index_id": "IDX_041",
+      "topic": "Social media handles",
+      "qa_ids": [41],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "social media", "instagram", "facebook", "linkedin",
+        "youtube", "follow", "social", "online presence",
+        "@rubenius", "handle", "where to follow"
+      ],
+      "intent": "social_media"
+    },
+
+    {
+      "index_id": "IDX_042",
+      "topic": "Repeat business / client retention",
+      "qa_ids": [42],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "repeat business", "returning clients", "client retention",
+        "loyal clients", "70 percent", "70%", "why clients return",
+        "long term clients", "satisfied clients"
+      ],
+      "intent": "client_retention"
+    },
+
+    {
+      "index_id": "IDX_043",
+      "topic": "Partner programme / architect partnerships",
+      "qa_ids": [43, 46],
+      "match_weight": 7,
+      "keyword_triggers": [
+        "partner", "partnership", "10 by 10", "architects partner",
+        "collaboration", "associate", "tie up", "empanel",
+        "global partner", "architect collaboration"
+      ],
+      "intent": "partnerships"
+    },
+
+    {
+      "index_id": "IDX_044",
+      "topic": "PVR Cinema project",
+      "qa_ids": [44],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "pvr", "pvr cinema", "cinema", "multiplex", "movie theater",
+        "pvr project", "pvr interiors"
+      ],
+      "intent": "project_pvr"
+    },
+
+    {
+      "index_id": "IDX_045",
+      "topic": "Educational / institutional spaces",
+      "qa_ids": [45],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "school", "college", "university", "educational", "institution",
+        "scaler", "vedam", "campus", "learning space",
+        "classroom design", "academic", "edtech", "ed-tech"
+      ],
+      "intent": "sector_education"
+    },
+
+    {
+      "index_id": "IDX_046",
+      "topic": "Co-working space design",
+      "qa_ids": [47],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "coworking", "co-working", "co working", "shared workspace",
+        "flexible office", "hot desking", "shared office",
+        "cowork space", "collaborative workspace"
+      ],
+      "intent": "sector_coworking"
+    },
+
+    {
+      "index_id": "IDX_047",
+      "topic": "Experience center design framework (6 pillars)",
+      "qa_ids": [48],
+      "match_weight": 9,
+      "keyword_triggers": [
+        "experience center framework", "strategy storytelling",
+        "technology craft psychology performance",
+        "how do you design experience centers",
+        "what goes into experience center",
+        "6 pillars", "six dimensions", "experience design method"
+      ],
+      "intent": "experience_center_framework"
+    },
+
+    {
+      "index_id": "IDX_048",
+      "topic": "Design + construction (not just design-only)",
+      "qa_ids": [49],
+      "match_weight": 8,
+      "keyword_triggers": [
+        "design only", "only design", "construction", "do you build",
+        "fabrication", "turnkey", "end to end", "full service",
+        "design and construct", "build too", "contractor"
+      ],
+      "intent": "design_construct"
+    },
+
+    {
+      "index_id": "IDX_049",
+      "topic": "Getting started / how to engage Rubenius",
+      "qa_ids": [50],
+      "match_weight": 10,
+      "keyword_triggers": [
+        "how to start", "get started", "first step", "onboarding",
+        "engage rubenius", "hire rubenius", "begin",
+        "start a project", "i want a design", "need interior design",
+        "want to redesign office", "initiate project"
+      ],
+      "intent": "getting_started"
+    },
+
+    {
+      "index_id": "IDX_050",
+      "topic": "General enquiry / hello / greeting",
+      "qa_ids": [1, 11, 50],
+      "match_weight": 3,
+      "keyword_triggers": [
+        "hello", "hi", "hey", "good morning", "good afternoon",
+        "good evening", "help", "can you help", "i need help",
+        "what can you do", "info", "information"
+      ],
+      "intent": "greeting_fallback"
+    }
+  ],
+
+  "fallback_config": {
+    "description": "Used when no keyword match is found above a confidence threshold",
+    "min_keyword_hits_to_answer": 1,
+    "fallback_response": "I'm sorry, I couldn't find a specific answer for that. You can reach Rubenius directly at info@rubenius.in or call +91 86608 42682. You can also start a project at https://www.rubenius.in/start-a-project",
+    "suggest_categories_on_fallback": true,
+    "default_suggested_categories": ["CAT_01", "CAT_03", "CAT_10"]
+  },
+
+  "matching_rules": {
+    "algorithm": "keyword_overlap",
+    "normalization": ["lowercase", "strip_punctuation", "trim_whitespace"],
+    "partial_match": true,
+    "rank_by": ["keyword_hit_count", "match_weight"],
+    "max_results_to_return": 3,
+    "dedup_qa_ids": true,
+    "description": "Tokenize the user query, normalize it, then scan all keyword_triggers in each index entry. Count hits per entry. Rank by (keyword_hit_count * match_weight) descending. Return top N unique QA IDs. Fetch answers from rubenius_chatbot_qa.json by id."
+  }
+}

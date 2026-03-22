@@ -46,7 +46,7 @@ const Navbar = () => {
 
         {/* Actions / Mobile Toggle / Login */}
         <div className="flex items-center gap-4">
-          <Link href="/admin/login">
+          <Link href="/login">
             <Button 
               variant="outline" 
               className="h-10 px-4 md:px-6 rounded-xl border-gray-200 text-black font-bold uppercase tracking-widest text-[10px] hover:bg-black hover:text-white transition-all duration-300 shadow-sm"

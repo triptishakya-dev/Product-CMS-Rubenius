@@ -42,8 +42,8 @@ export async function POST(req: Request) {
     // Send OTP via Resend
     try {
       const { resend } = await import("@/lib/resend");
-      await resend.emails.send({
-        from: 'Rubenix CMS <onboarding@resend.dev>',
+      const { data, error } = await resend.emails.send({
+        from: 'Rubenix CMS <noreply@rubenius-assignment.space>',
         to: email,
         subject: 'Your Login OTP',
         html: `
@@ -55,10 +55,20 @@ export async function POST(req: Request) {
           </div>
         `,
       });
+
+      if (error) {
+        console.error("Resend API error:", error);
+        return NextResponse.json(
+          { error: "Failed to send email. Please try again later." },
+          { status: 500 }
+        );
+      }
     } catch (emailError: any) {
       console.error("Failed to send email via Resend:", emailError);
-      // We still return success if the OTP was saved in DB, 
-      // but in production we might want to handle this differently.
+      return NextResponse.json(
+        { error: "Failed to send email. Please try again later." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(

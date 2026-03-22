@@ -28,13 +28,29 @@ export function LoginForm() {
     password: "",
     otp: "",
   })
+  const [countdown, setCountdown] = React.useState<number>(0)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    
+    // Limit OTP to 6 digits
+    if (id === "otp" && value.length > 6) return;
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.id]: e.target.value,
+      [id]: value,
     }))
   }
+
+  React.useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [countdown]);
 
   async function handleSendOtp() {
     if (!formData.email) {
@@ -61,6 +77,7 @@ export function LoginForm() {
       }
 
       setOtpStep("verify")
+      setCountdown(15) // Start 15s timer
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -174,19 +191,34 @@ export function LoginForm() {
                     type="text"
                     placeholder="123456"
                     required
-                    maxLength={6}
                     value={formData.otp}
                     onChange={handleChange}
                     disabled={isLoading}
                     className="border-neutral-200 focus:ring-neutral-900 h-12 text-lg"
                   />
-                  <button 
-                    type="button"
-                    onClick={() => setOtpStep("send")}
-                    className="text-sm text-neutral-500 hover:text-neutral-900 text-left mt-1 underline"
-                  >
-                    Resend OTP
-                  </button>
+                  <div className="flex items-baseline justify-between mt-1">
+                    <button 
+                      type="button"
+                      onClick={() => setOtpStep("send")}
+                      className="text-sm text-neutral-500 hover:text-neutral-900 underline"
+                    >
+                      Change Email
+                    </button>
+                    {countdown > 0 ? (
+                      <span className="text-sm text-neutral-400 font-medium">
+                        Resend in {countdown}s
+                      </span>
+                    ) : (
+                      <button 
+                        type="button"
+                        onClick={handleSendOtp}
+                        className="text-sm text-neutral-900 font-bold hover:underline"
+                        disabled={isLoading}
+                      >
+                        Resend OTP
+                      </button>
+                    )}
+                  </div>
                 </div>
               ) : null}
 
