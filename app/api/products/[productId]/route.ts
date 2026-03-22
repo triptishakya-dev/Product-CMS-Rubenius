@@ -15,10 +15,11 @@ function parseBase64Image(base64String: string) {
 
 export async function GET(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
-    const id = parseInt(params.productId);
+    const { productId } = await params;
+    const id = parseInt(productId);
     
     if (isNaN(id)) {
       return new NextResponse("Invalid ID", { status: 400 });
@@ -43,11 +44,12 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
+    const { productId } = await params;
     const body = await req.json();
-    const id = parseInt(params.productId);
+    const id = parseInt(productId);
 
     if (isNaN(id)) {
       return new NextResponse("Invalid ID", { status: 400 });
@@ -85,10 +87,11 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
-    const id = parseInt(params.productId);
+    const { productId } = await params;
+    const id = parseInt(productId);
     
     if (isNaN(id)) {
       return new NextResponse("Invalid ID", { status: 400 });

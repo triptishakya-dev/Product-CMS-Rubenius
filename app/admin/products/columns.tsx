@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal, Edit, Trash2, ArrowUpDown } from "lucide-react"
+import { MoreHorizontal, Edit, Trash2, ArrowUpDown, Eye } from "lucide-react"
 import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 
@@ -15,19 +15,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { AlertModal } from "@/components/admin/AlertModal"
+import { ProductViewModal } from "@/components/admin/ProductViewModal"
 
 export type ProductColumn = {
   id: number
   name: string
   image: string
   description: string
-  usp: string
+  usp: string[] | string
   createdAt: string
 }
 
 const ActionCell = ({ data }: { data: ProductColumn }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [viewOpen, setViewOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
@@ -65,12 +67,25 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
         onConfirm={onConfirm}
         loading={loading}
       />
+      <ProductViewModal 
+        isOpen={viewOpen}
+        onClose={() => setViewOpen(false)}
+        data={data}
+      />
       <div className="flex items-center gap-x-2">
         <Button
           variant="outline"
           size="icon"
+          onClick={() => setViewOpen(true)}
+          className="h-8 w-8 border-gray-300 hover:bg-gray-100 text-black shadow-sm transition-all active:scale-95"
+        >
+          <Eye className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
           onClick={() => console.log("Edit", data.id)}
-          className="h-8 w-8 border-gray-300 hover:bg-gray-100 text-black"
+          className="h-8 w-8 border-gray-300 hover:bg-gray-100 text-black shadow-sm transition-all active:scale-95"
         >
           <Edit className="h-4 w-4" />
         </Button>
@@ -78,7 +93,7 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
           variant="outline"
           size="icon"
           onClick={() => setOpen(true)}
-          className="h-8 w-8 border-gray-300 hover:bg-red-50 text-red-600"
+          className="h-8 w-8 border-gray-300 hover:bg-red-50 text-red-600 shadow-sm transition-all active:scale-95"
         >
           <Trash2 className="h-4 w-4" />
         </Button>
@@ -88,6 +103,10 @@ const ActionCell = ({ data }: { data: ProductColumn }) => {
 }
 
 export const columns: ColumnDef<ProductColumn>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -107,35 +126,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
     ),
   },
   {
-    accessorKey: "image",
-    header: "Image",
-    cell: ({ row }) => {
-      const image = row.getValue("image") as string
-      return (
-        <div className="w-12 h-12 relative rounded-md overflow-hidden bg-gray-100 border border-gray-200">
-          <img
-            src={image || "/placeholder-product.png"}
-            alt={row.getValue("name")}
-            className="object-cover w-full h-full"
-          />
-        </div>
-      )
-    },
-  },
-  {
     accessorKey: "description",
     header: "Description",
     cell: ({ row }) => (
       <div className="max-w-[300px] truncate text-gray-600">
         {row.getValue("description")}
       </div>
-    ),
-  },
-  {
-    accessorKey: "usp",
-    header: "USP",
-    cell: ({ row }) => (
-      <div className="text-gray-600">{row.getValue("usp")}</div>
     ),
   },
   {

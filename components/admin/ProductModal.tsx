@@ -34,6 +34,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
 }) => {
   const [isMounted, setIsMounted] = React.useState(false)
+  const [step, setStep] = React.useState(1)
   const [name, setName] = React.useState("")
   const [description, setDescription] = React.useState("")
   const [usps, setUsps] = React.useState<string[]>([""])

@@ -47,17 +47,17 @@ export const AlertModal: React.FC<AlertModalProps> = ({
             disabled={loading}
             variant="outline"
             onClick={onClose}
-            className="border-gray-300 hover:bg-gray-100"
+            className="border-gray-300 hover:bg-gray-100 rounded-xl"
           >
-            Cancel
+            No, Cancel
           </Button>
           <Button
             disabled={loading}
             variant="destructive"
             onClick={onConfirm}
-            className="bg-black text-white hover:bg-gray-800"
+            className="bg-black text-white hover:bg-gray-800 rounded-xl"
           >
-            Continue
+            Yes, Delete Product
           </Button>
         </div>
       </DialogContent>
