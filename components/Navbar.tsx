@@ -29,7 +29,7 @@ const Navbar = () => {
         "max-w-7xl mx-auto rounded-2xl transition-all duration-300 flex items-center justify-between px-6 h-16 md:h-20",
         isScrolled 
           ? "bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg" 
-          : "bg-transparent"
+          : "bg-gray-100 border border-gray-100"
       )}>
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">

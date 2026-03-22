@@ -1,30 +1,48 @@
-import React from 'react'
+"use client";
+
+import React, { useState, useEffect } from 'react'
 import { format } from "date-fns"
 import { ProductColumn } from "@/app/admin/products/columns"
 import ProductCard from '@/components/ProductCard'
 import { Sparkles, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-const Home = async () => {
-  const response = await fetch("/api/products", {
-    cache: 'no-store'
-  });
-  
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
-  }
+const Home = () => {
+  const [products, setProducts] = useState<ProductColumn[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const products = await response.json();
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${window.location.origin}/api/products`, {
+          cache: 'no-store'
+        });
+        
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
 
-  const formattedProducts: ProductColumn[] = products.map((item: any) => ({
-    id: item.id,
-    name: item.name,
-    image: item.image,
-    description: item.description,
-    usp: item.usp,
-    createdAt: format(new Date(item.createdAt), "MMMM do, yyyy"),
-  }));
+        const data = await response.json();
+        
+        const formattedProducts: ProductColumn[] = data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          image: item.image,
+          description: item.description,
+          usp: item.usp,
+          createdAt: format(new Date(item.createdAt), "MMMM do, yyyy"),
+        }));
+
+        setProducts(formattedProducts);
+      } catch (error) {
+        console.error("Home fetch error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="flex flex-col pb-20 pt-10">
@@ -46,9 +64,13 @@ const Home = async () => {
           </Link>
         </div>
 
-        {formattedProducts.length > 0 ? (
+        {isLoading ? (
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black" />
+          </div>
+        ) : products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {formattedProducts.map((product) => (
+            {products.map((product) => (
               <ProductCard key={product.id} data={product} />
             ))}
           </div>
@@ -68,4 +90,4 @@ const Home = async () => {
   )
 }
 
-export default Home
+export default Home
