@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { uploadFile } from "@/lib/s3";
+import { uploadToS3 } from "@/lib/s3";
 
 function parseBase64Image(base64String: string) {
   const matches = base64String.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     if (image.startsWith("data:image")) {
       const { type, buffer } = parseBase64Image(image);
       const fileName = `product-${Date.now()}.${type.split("/")[1]}`;
-      imageUrl = await uploadFile(buffer, fileName, type);
+      imageUrl = await uploadToS3(buffer, fileName, type);
     }
 
     const product = await prisma.product.create({
