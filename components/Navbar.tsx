@@ -40,7 +40,7 @@ const Navbar = () => {
             "text-2xl font-black tracking-tighter transition-colors",
             isScrolled ? "text-black" : "text-black"
           )}>
-            RUBENIX
+            RUBENIUS
           </span>
         </Link>
 
