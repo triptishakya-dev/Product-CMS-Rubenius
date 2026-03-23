@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="h-10 w-10 bg-black rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <span className="text-white font-black text-xl italic">R</span>
             </div>
-            <span className="text-2xl font-black tracking-tighter text-black">RUBENIX</span>
+            <span className="text-2xl font-black tracking-tighter text-black">RUBENIUS</span>
           </Link>
           <p className="text-gray-500 max-w-sm text-sm font-medium leading-relaxed">
             Redefining the digital shopping experience with premium curated collections and seamless technical integration.
@@ -49,7 +49,7 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">© 2026 Rubenix Advanced Commerce. All rights reserved.</p>
+        <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">© 2026 Rubenius Advanced Commerce. All rights reserved.</p>
         <div className="flex gap-8">
           <Link href="#" className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-black">Privacy Policy</Link>
           <Link href="#" className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-black">Terms of Service</Link>
