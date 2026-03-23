@@ -4,7 +4,7 @@ import { Facebook, Instagram, Twitter, MessageSquare } from "lucide-react"
 const Footer = () => {
   return (
     <footer className="w-full bg-white border-t border-gray-100 pt-16 pb-8 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         {/* Info */}
         <div className="col-span-1 md:col-span-2 space-y-6">
           <Link href="/" className="flex items-center gap-2 group">

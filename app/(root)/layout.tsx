@@ -10,7 +10,7 @@ export default function RootGroupLayout({
   return (
     <div className="flex flex-col min-h-screen relative">
       <Navbar />
-      <main className="flex-1 pt-24 md:pt-32">
+      <main className="flex-1 pt-16 md:pt-20">
         {children}
       </main>
       <Footer />

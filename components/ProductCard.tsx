@@ -24,61 +24,70 @@ const ProductCard: React.FC<ProductCardProps> = ({
       />
       <div 
         onClick={() => setViewOpen(true)}
-        className="group bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 cursor-pointer flex flex-col h-full"
+        className="group relative flex flex-col md:flex-row bg-white rounded-[2rem] border border-slate-100 overflow-hidden hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] transition-all duration-700 cursor-pointer w-full"
       >
-        {/* Image Section */}
-        <div className="relative aspect-[4/5] bg-gray-50 overflow-hidden">
+        {/* Image Section - Wide Aspect on Desktop */}
+        <div className="relative max-w-lg md:w-80 h-72 md:h-auto bg-slate-50 overflow-hidden flex-shrink-0">
           <img 
             src={data.image || "/placeholder-product.png"} 
             alt={data.name}
-            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
+            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-1000 ease-out py-4"
           />
           
           {/* Overlay Actions */}
-          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
             <Button 
               size="icon" 
               variant="secondary" 
-              className="rounded-full shadow-xl hover:scale-110 transition-transform"
+              className="rounded-full h-12 w-12 shadow-2xl hover:scale-110 transition-transform bg-white/90 backdrop-blur-md border-none"
             >
-              <Eye className="h-5 w-5 text-black" />
+              <Eye className="h-5 w-5 text-slate-900" />
             </Button>
             <Button 
               size="icon" 
               variant="secondary" 
-              className="rounded-full shadow-xl hover:scale-110 transition-transform"
+              className="rounded-full h-12 w-12 shadow-2xl hover:scale-110 transition-transform bg-white/90 backdrop-blur-md border-none"
             >
-              <ShoppingBag className="h-5 w-5 text-black" />
+              <ShoppingBag className="h-5 w-5 text-slate-900" />
             </Button>
           </div>
 
-          <div className="absolute top-4 left-4">
-             <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-black shadow-sm">
+          <div className="absolute top-6 left-6">
+             <span className="px-4 py-1.5 bg-emerald-500 text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-200">
                 New Arrival
              </span>
           </div>
         </div>
 
         {/* Content Section */}
-        <div className="p-6 flex flex-col flex-1 gap-2">
-          <div className="flex items-center justify-between gap-2">
-            <h3 className="text-lg font-black tracking-tight text-black group-hover:text-gray-600 transition-colors truncate">
-              {data.name}
-            </h3>
-            <span className="text-xs font-bold text-gray-400">#{data.id}</span>
+        <div className="p-8 md:p-10 flex flex-col flex-1 min-w-0 bg-gradient-to-br from-white to-slate-50/30">
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Premium Collection</span>
+              <h3 className="text-3xl font-black tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors duration-300">
+                {data.name}
+              </h3>
+            </div>
+            <span className="text-xs font-bold text-slate-300 bg-slate-50 px-3 py-1 rounded-full">#{data.id}</span>
           </div>
           
-          <p className="text-gray-500 text-sm font-medium line-clamp-2 leading-relaxed">
+          <p className="text-slate-500 text-base font-medium leading-relaxed mb-8 line-clamp-3">
             {data.description}
           </p>
 
-          <div className="mt-auto pt-4 flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Refined On</span>
-              <span className="text-xs font-bold text-black">{data.createdAt}</span>
+          <div className="mt-auto pt-8 border-t border-slate-100 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Refined On</span>
+                <span className="text-sm font-bold text-slate-900">{data.createdAt}</span>
+              </div>
             </div>
-            <div className="h-10 w-10 bg-black rounded-xl flex items-center justify-center text-white group-hover:bg-gray-800 transition-colors">
-              <Eye className="h-5 w-5" />
+
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-emerald-500 transition-colors">View Details</span>
+              <div className="h-12 w-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white group-hover:bg-emerald-600 group-hover:rotate-[360deg] transition-all duration-700 shadow-xl shadow-slate-200 group-hover:shadow-emerald-100">
+                <Eye className="h-5 w-5" />
+              </div>
             </div>
           </div>
         </div>
