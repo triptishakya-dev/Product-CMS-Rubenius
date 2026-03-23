@@ -24,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       />
       <div 
         onClick={() => setViewOpen(true)}
-        className="group relative flex flex-col md:flex-row bg-white rounded-[2rem] border border-slate-100 overflow-hidden hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] transition-all duration-700 cursor-pointer w-full max-w-4xl "
+        className="group relative flex flex-col md:flex-row bg-white rounded-[2rem] border border-slate-100 overflow-hidden hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] transition-all duration-700 cursor-pointer w-full hover:-translate-y-2"
       >
         {/* Image Section - Wide Aspect on Desktop */}
         <div className="relative w-full md:w-80 h-72 md:h-auto bg-slate-50 overflow-hidden flex-shrink-0">

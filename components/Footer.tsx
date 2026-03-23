@@ -111,17 +111,6 @@ const Footer = () => {
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
             © 2026 Rubenius Commerce. <span className="text-slate-700 mx-2">|</span> Designed for Excellence.
           </p>
-          
-          <div className="flex items-center gap-6">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-8 w-8 rounded-full border-2 border-[#0a0a0b] bg-slate-800" />
-              ))}
-            </div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-              Trusted by 10k+ users
-            </p>
-          </div>
         </div>
       </div>
     </footer>
