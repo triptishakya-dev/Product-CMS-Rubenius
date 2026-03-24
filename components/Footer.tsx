@@ -82,7 +82,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500">Contact</h4>
+            <h4 className="text-[11px] font-black uppercase tracking-[0.2em]">Contact</h4>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
