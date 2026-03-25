@@ -45,7 +45,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col pb-20 pt-10">
+    <div className="flex flex-col  pt-10">
       {/* Product Showcase */}
       <section className="px-6 md:px-12 py-16 max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -90,4 +90,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home
