@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default Home;
+export default page;
