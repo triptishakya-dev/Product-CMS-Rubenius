@@ -85,7 +85,7 @@ const Chatbot = () => {
           </div>
 
           {/* Body */}
-          <div className="flex-1 p-6 overflow-y-auto space-y-6 custom-scrollbar bg-gray-50/50">
+          <div className="flex-1  overflow-y-auto space-y-6 custom-scrollbar bg-gray-50/50">
             {/* Initial Message */}
             <div className="flex gap-3">
               <div className="h-8 w-8 bg-black rounded-xl flex items-center justify-center shrink-0">
